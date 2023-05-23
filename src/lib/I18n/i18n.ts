@@ -15,6 +15,36 @@ export type I18NTranslation = {
     selectProfile: string
     noProfiles: string
     createProfile: string
+    newProfile: string
+    profileName: string
+    profileType: string
+    profileTypes: {
+        inBrowser: string
+        remote: string
+    }
+
+    profileTypeDescription: {
+        inBrowser: string
+        remote: string
+    }
+
+    remoteURL: string
+
+    remoteAuthType: string
+    remoteAuthTypes: {
+        noPassword: string
+        token: string
+    }
+
+    remoteToken: string
+
+    create: string
+    creating: string
+    cancel: string
+
+    "load-profile-error": string
+
+    loading: string
 }
 
 export const i18n: I18N = {

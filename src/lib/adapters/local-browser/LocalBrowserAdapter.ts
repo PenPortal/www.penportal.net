@@ -2,10 +2,9 @@ import type { Adapter } from "$lib/adapters/adapters"
 import { LocalBrowserController } from "$lib/adapters/local-browser/LocalBrowserController"
 import Dexie from "dexie"
 
-
-const LocalBrowserAdapter: Adapter<LocalBrowserController> = {
+const LocalBrowserAdapter: Adapter<LocalBrowserController, LocalBrowserConfig> = {
     name: "Local Browser",
-    createController(): LocalBrowserController {
+    createController(config: LocalBrowserConfig): LocalBrowserController {
         const db = new Dexie("pen-portal-local-browser") as LocalDB
         db.version(1).stores({
             spaces: "id, &name, rootDirectoryId",
@@ -15,6 +14,10 @@ const LocalBrowserAdapter: Adapter<LocalBrowserController> = {
 
         return new LocalBrowserController(db)
     }
+}
+
+export type LocalBrowserConfig = {
+    name: string
 }
 
 export type LocalDB = Dexie & {

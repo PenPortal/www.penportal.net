@@ -4,30 +4,28 @@ type ProfileDB = Dexie & {
     profiles: Dexie.Table<Profile, string>
 }
 
+export type ProfileType = "in-browser" | "remote"
+
 export type Profile = {
     id: string
     type: string
+    name: string
     config: InBrowser | Remote<"no-password" | "token">
 }
 
-type InBrowser = {
-    name: string
-}
+export type InBrowser = {}
 
-type Remote<Auth extends "no-password" | "token"> = {
-    name: string
+export type RemoteAuth = "no-password" | "token"
+
+export type Remote<Auth extends RemoteAuth> = {
     url: string
     authType: Auth
-    auth: Auth extends "no-password" ? NoPasswordAuth : TokenAuth
+    options: Auth extends "no-password" ? NoPasswordAuth : TokenAuth
 }
 
-type NoPasswordAuth = {
-    type: "no-password"
-    email: string
-}
+export type NoPasswordAuth = {}
 
-type TokenAuth = {
-    type: "token"
+export type TokenAuth = {
     token: string
 }
 

@@ -4,12 +4,8 @@ import type { LocalBrowserDirectory } from "$lib/adapters/local-browser/LocalBro
 import type { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
 import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
 
-
 export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalBrowserDirectory, LocalBrowserNote> {
-
-
     db: LocalDB
-
 
     constructor(db: LocalDB) {
         super()
@@ -24,12 +20,12 @@ export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalB
 
     async refreshSpaces() {
         const dbSpaces = await this.db.spaces.toArray()
-        const spaceList = dbSpaces.map(dbSpace => {
+        const spaceList = dbSpaces.map((dbSpace) => {
             return new LocalBrowserSpace(this.db, dbSpace.name, dbSpace.id, dbSpace.rootDirectoryId)
         })
 
         const spaceObj: Record<string, LocalBrowserSpace> = {}
-        spaceList.forEach(space => {
+        spaceList.forEach((space) => {
             spaceObj[space.name] = space
         })
 
@@ -47,7 +43,6 @@ export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalB
             throw new Error(`Cannot create space with name ${name}`)
         }
 
-
         const spaceId = crypto.randomUUID()
         const rootDirectoryId = crypto.randomUUID()
 
@@ -64,7 +59,6 @@ export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalB
             directories: [],
             notes: []
         })
-
     }
 
     async deleteSpace(space: LocalBrowserSpace) {
@@ -75,6 +69,4 @@ export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalB
 
         await this.db.spaces.delete(space.id)
     }
-
-
 }

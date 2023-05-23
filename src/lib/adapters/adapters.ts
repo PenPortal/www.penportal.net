@@ -1,8 +1,7 @@
 import type { Controller } from "$lib/controller/Controller"
 
-
-export interface Adapter<C extends Controller<any, any, any>> {
+export interface Adapter<C extends Controller<any, any, any>, CONFIG> {
     name: string
 
-    createController(): C
+    createController(config: CONFIG): C
 }

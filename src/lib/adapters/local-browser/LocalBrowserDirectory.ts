@@ -2,9 +2,7 @@ import { Directory } from "$lib/controller/Controller"
 import type { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
 import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
 
-
 export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, LocalBrowserNote> {
-
     db: LocalDB
 
     constructor(db: LocalDB, name: string, directoryId: string) {
@@ -20,7 +18,6 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
         return true
     }
 
-
     async canCreateDirectory(name: string): Promise<boolean> {
         const hasDirectory = await this.db.directories.where({ name, parentId: this.id }).first()
         return !hasDirectory
@@ -32,7 +29,6 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
             throw new Error(`Cannot create directory with name ${name}`)
         }
 
-
         await this.db.directories.add({
             id: crypto.randomUUID(),
             parentId: this.id,
@@ -41,7 +37,6 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
             notes: []
         })
     }
-
 
     async canCreateNote(name: string): Promise<boolean> {
         const hasNote = await this.db.notes.where({ name, parentId: this.id }).first()
@@ -54,7 +49,6 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
             throw new Error(`Cannot create note with name ${name}`)
         }
 
-
         await this.db.notes.add({
             id: crypto.randomUUID(),
             parentId: this.id,
@@ -63,7 +57,6 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
         })
     }
 
-
     deleteDirectory(directory: LocalBrowserDirectory): Promise<void> {
         return Promise.resolve(undefined)
     }
@@ -71,6 +64,4 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
     deleteNote(): Promise<void> {
         return Promise.resolve(undefined)
     }
-
-
 }

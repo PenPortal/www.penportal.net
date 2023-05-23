@@ -21,11 +21,10 @@
 
     export const snapshot: Snapshot = {
         capture: () => lang,
-        restore: (value) => lang = value
+        restore: (value) => (lang = value)
     }
 
     setContext("i18n", i18nStore)
-
 </script>
 
 <slot />

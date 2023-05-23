@@ -3,7 +3,6 @@ import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
 import { get } from "svelte/store"
 
 export class LocalBrowserNote extends Note {
-
     db: LocalDB
 
     constructor(db: LocalDB, name: string, id: string) {
@@ -23,5 +22,4 @@ export class LocalBrowserNote extends Note {
     async saveContent(): Promise<void> {
         await this.db.notes.update(this.id, { content: get(this.content!) })
     }
-
 }

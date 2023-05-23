@@ -3,16 +3,13 @@ import { LocalBrowserDirectory } from "$lib/adapters/local-browser/LocalBrowserD
 import type { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
 import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
 
-
 export class LocalBrowserSpace extends Space<LocalBrowserDirectory, LocalBrowserNote> {
     db: LocalDB
     root: LocalBrowserDirectory
-
 
     constructor(db: LocalDB, name: string, id: string, dirId: string) {
         super(name, id)
         this.db = db
         this.root = new LocalBrowserDirectory(db, name, dirId)
     }
-
 }

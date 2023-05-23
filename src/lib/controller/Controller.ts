@@ -1,7 +1,6 @@
 import type { Writable } from "svelte/store"
 import { get, writable } from "svelte/store"
 
-
 export abstract class Controller<SPACE extends Space<D, N>, D extends Directory<D, N>, N extends Note> {
     spaces: Writable<Record<string, SPACE>> = writable({})
 
@@ -20,7 +19,6 @@ export abstract class Controller<SPACE extends Space<D, N>, D extends Directory<
 
         return get(this.spaces)[name] ?? null
     }
-
 
     /**
      * @returns the default space should have name [Default]
@@ -54,7 +52,6 @@ export abstract class Space<D extends Directory<D, N>, N extends Note> {
     id: string
     abstract root: D
 
-
     protected constructor(name: string, id: string) {
         this.name = name
         this.id = id
@@ -63,11 +60,9 @@ export abstract class Space<D extends Directory<D, N>, N extends Note> {
     async init(): Promise<void> {
         return
     }
-
 }
 
 export abstract class Directory<DIR extends Directory<DIR, NOTE>, NOTE extends Note> implements DirectoryItem {
-
     name: string
     id: string
 
@@ -90,7 +85,6 @@ export abstract class Directory<DIR extends Directory<DIR, NOTE>, NOTE extends N
     async getNote(name: string): Promise<NOTE | null> {
         return get(this.notes)[name] ?? null
     }
-
 
     async canCreateDirectory(name: string): Promise<boolean> {
         return !(await this.getDirectory(name))
