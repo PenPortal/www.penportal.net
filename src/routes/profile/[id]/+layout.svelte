@@ -6,45 +6,20 @@
     import type { Profile } from "../../profiles"
     import type { I18NTranslation } from "$lib/I18n/i18n"
     import { getContext, setContext } from "svelte"
-    import { formatErrorMessage } from "$lib/I18n/formatErrorMessage"
+
+    import "./profile-space-transition.css"
 
     export let data: LayoutData
 
-    $: loadPromise = loadController(data.profile)
-
     const profile = writable<Profile>(data.profile)
     setContext("profile", profile)
+    $: $profile = data.profile
 
-    const controller = writable<Controller<any, any, any>>()
+    const controller = writable<Controller<any, any, any>>(data.controller!)
     setContext("controller", controller)
+    $: $controller = data.controller!
 
     const i18n = getContext<Readable<I18NTranslation>>("i18n")
-
-    async function loadController(profile: Profile) {
-        if (profile) {
-            const { LocalBrowserAdapter } = await import("$lib/adapters/local-browser/LocalBrowserAdapter")
-            const c = LocalBrowserAdapter.createController({
-                name: profile.name
-            })
-            await c.init()
-            $controller = c
-        }
-    }
 </script>
 
-{#await loadPromise}
-    <h2 class="headline3">{data.profile.name} {$i18n.loading}...</h2>
-{:then _}
-    <slot />
-{:catch error}
-    <h2 class="headline3">{formatErrorMessage($i18n, error)}</h2>
-{/await}
-
-<style>
-    h2 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
+<slot />

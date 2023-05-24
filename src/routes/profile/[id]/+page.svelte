@@ -1,33 +1,36 @@
 <script lang="ts">
     import { getContext } from "svelte"
-    import type { Controller } from "$lib/controller/Controller"
-    import { Space } from "$lib/controller/Controller"
     import type { Readable } from "svelte/store"
     import type { I18NTranslation } from "$lib/I18n/i18n"
     import { page } from "$app/stores"
-    import type { Profile } from "../../profiles"
+    import type { PageData } from "./$types"
 
-    const controller = getContext<Readable<Controller<any, any, Space<any, any>>>>("controller")
+    export let data: PageData
+
+    $: controller = data.controller
+    $: profile = data.profile
+    $: spaces = data.controller!.spaces
     const i18n = getContext<Readable<I18NTranslation>>("i18n")
-    const profile = getContext<Readable<Profile>>("profile")
-
-    let spaces = $controller.spaces
 
     $: console.log($spaces)
 
     function formatSpaceName(name: string) {
-        return name == "[Default]" ? $i18n.default + $i18n.space : name
+        return name == "[Default]" ? $i18n.default + " " + $i18n.space : name
     }
 </script>
 
 <main>
-    <h1 class="headline2">{$profile.name}</h1>
+    <h1 class="headline2" style:view-transition-name="title-of-profile-{profile.id}">
+        {profile.name}
+    </h1>
     <h3 class="subtitle1">{$i18n.selectASpace}</h3>
     <ol class="space-list">
         {#each Object.values($spaces) as space (space.id)}
             <li class="card">
-                <a class="subtitle3" href="{$page.url.pathname}/space/{space.id}">
-                    {formatSpaceName(space.name)}
+                <a class="subtitle3" href="{$page.url.pathname}/{space.name}">
+                    <p style:view-transition-name="title-of-profile-space-{profile.id}-{space.id}">
+                        {formatSpaceName(space.name)}
+                    </p>
                 </a>
             </li>
         {/each}

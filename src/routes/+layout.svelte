@@ -3,13 +3,16 @@
     import "./baseStyle.css"
     import "./typography.css"
 
-    // import { preparePageTransition } from "$lib/page-transition"
-    //
-    // preparePageTransition()
+    import "./profile-page-transition.css"
+
+    import { preparePageTransition } from "$lib/page-transition"
+
     import type { Snapshot } from "./$types"
     import { writable } from "svelte/store"
     import { setContext } from "svelte"
     import { i18n } from "$lib/I18n/i18n"
+
+    preparePageTransition()
 
     let lang = "en"
 

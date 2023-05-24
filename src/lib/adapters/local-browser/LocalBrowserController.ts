@@ -3,6 +3,7 @@ import { LocalBrowserSpace } from "$lib/adapters/local-browser/LocalBrowserSpace
 import type { LocalBrowserDirectory } from "$lib/adapters/local-browser/LocalBrowserDirectory"
 import type { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
 import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
+import { liveQuery } from "dexie"
 
 export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalBrowserDirectory, LocalBrowserNote> {
     db: LocalDB
@@ -15,7 +16,11 @@ export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalB
     async init(): Promise<void> {
         await this.refreshSpaces()
         await super.init()
-        await this.getDefaultSpace()
+        liveQuery(async () => {
+            await this.db.spaces
+        }).subscribe(async () => {
+            await this.refreshSpaces()
+        })
     }
 
     async refreshSpaces() {

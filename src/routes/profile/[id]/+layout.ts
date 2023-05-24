@@ -11,7 +11,20 @@ export const load = (async ({ params }) => {
         }
     }
 
+    if (profile) {
+        const { LocalBrowserAdapter } = await import("$lib/adapters/local-browser/LocalBrowserAdapter")
+        const c = LocalBrowserAdapter.createController({
+            name: profile.name
+        })
+        await c.init()
+        return {
+            profile,
+            controller: c
+        }
+    }
+
     return {
-        profile
+        profile,
+        controller: null
     }
 }) satisfies LayoutLoad
