@@ -14,8 +14,8 @@ export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalB
 
     async init(): Promise<void> {
         await this.refreshSpaces()
-
         await super.init()
+        await this.getDefaultSpace()
     }
 
     async refreshSpaces() {

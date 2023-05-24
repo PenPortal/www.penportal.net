@@ -10,7 +10,7 @@
     import type { Readable } from "svelte/store"
     import CreateProfileModal from "./CreateProfileModal.svelte"
 
-    const i18n = getContext<I18NTranslation>("i18n")
+    const i18n = getContext<Readable<I18NTranslation>>("i18n")
 
     const profiles = liveQuery(() => profileDB.profiles.toArray()) as Readable<Array<Profile>> // dirty hack to make ide work
 
@@ -25,7 +25,9 @@
         <button class="create-btn subtitle3" on:click={() => (showCreateProfileModal = true)}>
             +&nbsp;{$i18n.createProfile}
         </button>
-        {#if $profiles == null}{:else if $profiles.length === 0}
+        {#if $profiles == null}
+            <p class="subtitle2" style="opacity: 0;">{$i18n.loading}</p>
+        {:else if $profiles.length === 0}
             <p class="subtitle2 no-profile">{$i18n.noProfiles}</p>
         {:else}
             <ol>

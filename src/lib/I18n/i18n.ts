@@ -45,6 +45,10 @@ export type I18NTranslation = {
     "load-profile-error": string
 
     loading: string
+    default: string
+    space: string
+
+    selectASpace: string
 }
 
 export const i18n: I18N = {

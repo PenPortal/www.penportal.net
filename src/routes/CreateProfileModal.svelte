@@ -3,6 +3,7 @@
     import type { I18NTranslation } from "$lib/I18n/i18n"
     import type { ProfileType, Remote, RemoteAuth } from "./profiles"
     import { profileDB } from "./profiles"
+    import type { Readable } from "svelte/store"
 
     const defaultRemoteConfig: Remote<RemoteAuth> = {
         url: "https://example.com",
@@ -16,7 +17,7 @@
 
     let dialog: HTMLDialogElement
 
-    const i18n = getContext<I18NTranslation>("i18n")
+    const i18n = getContext<Readable<I18NTranslation>>("i18n")
 
     $: if (dialog && showModal) dialog.showModal()
 

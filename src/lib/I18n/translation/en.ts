@@ -36,5 +36,8 @@ export const english: I18NTranslation = {
 
     "load-profile-error": "Error loading profile",
 
-    loading: "Loading"
+    loading: "Loading",
+    default: "Default",
+    space: "Space",
+    selectASpace: "Select a space"
 }
