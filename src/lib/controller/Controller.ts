@@ -108,6 +108,8 @@ export abstract class Directory<DIR extends Directory<DIR, NOTE>, NOTE extends N
     abstract deleteNote(): Promise<void>
 }
 
+export const emptySerializedEditorState: SerializedEditorState = JSON.parse('{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}')
+
 export abstract class Note implements DirectoryItem {
     name: string
     id: string

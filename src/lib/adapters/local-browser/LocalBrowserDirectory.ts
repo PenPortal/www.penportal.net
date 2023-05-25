@@ -1,4 +1,4 @@
-import { Directory } from "$lib/controller/Controller"
+import { Directory, emptySerializedEditorState } from "$lib/controller/Controller"
 import { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
 import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
 import { liveQuery } from "dexie"
@@ -108,7 +108,7 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
             id: crypto.randomUUID(),
             parentId: this.id,
             name: name,
-            content: ""
+            content: emptySerializedEditorState
         })
     }
 
