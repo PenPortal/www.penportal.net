@@ -25,9 +25,15 @@ export class LocalBrowserController extends Controller<LocalBrowserSpace, LocalB
 
     async refreshSpaces() {
         const dbSpaces = await this.db.spaces.toArray()
-        const spaceList = dbSpaces.map((dbSpace) => {
-            return new LocalBrowserSpace(this.db, dbSpace.name, dbSpace.id, dbSpace.rootDirectoryId)
-        })
+        const spaceListPromise = Promise.all(
+            dbSpaces.map(async (dbSpace) => {
+                const space = new LocalBrowserSpace(this.db, dbSpace.name, dbSpace.id, dbSpace.rootDirectoryId)
+                await space.init()
+                return space
+            })
+        )
+
+        const spaceList = await spaceListPromise
 
         const spaceObj: Record<string, LocalBrowserSpace> = {}
         spaceList.forEach((space) => {

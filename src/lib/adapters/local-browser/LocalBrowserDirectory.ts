@@ -1,6 +1,7 @@
 import { Directory } from "$lib/controller/Controller"
-import type { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
+import { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
 import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
+import { liveQuery } from "dexie"
 
 export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, LocalBrowserNote> {
     db: LocalDB
@@ -8,6 +9,60 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
     constructor(db: LocalDB, name: string, directoryId: string) {
         super(name, directoryId)
         this.db = db
+    }
+
+    async init(): Promise<void> {
+        await this.refreshDirectories()
+        await this.refreshNotes()
+
+        liveQuery(async () => {
+            await this.db.directories.where({ parentId: this.id })
+
+            await this.db.notes.where({ parentId: this.id })
+        }).subscribe(() => {
+            this.refreshDirectories()
+            this.refreshNotes()
+        })
+    }
+
+    private async refreshDirectories() {
+        const dbDirectories = await this.db.directories.where({ parentId: this.id }).toArray()
+        const directoryListPromise = Promise.all(
+            dbDirectories.map(async (dbDirectory) => {
+                const directory = new LocalBrowserDirectory(this.db, dbDirectory.name, dbDirectory.id)
+                await directory.init()
+                return directory
+            })
+        )
+
+        const directoryList = await directoryListPromise
+
+        const directoryObj: Record<string, LocalBrowserDirectory> = {}
+        directoryList.forEach((directory) => {
+            directoryObj[directory.name] = directory
+        })
+
+        this.directories.set(directoryObj)
+    }
+
+    private async refreshNotes() {
+        const dbNotes = await this.db.notes.where({ parentId: this.id }).toArray()
+        const noteListPromise = Promise.all(
+            dbNotes.map(async (dbNote) => {
+                const note = new LocalBrowserNote(this.db, dbNote.name, dbNote.id)
+                await note.init()
+                return note
+            })
+        )
+
+        const noteList = await noteListPromise
+
+        const noteObj: Record<string, LocalBrowserNote> = {}
+        noteList.forEach((note) => {
+            noteObj[note.name] = note
+        })
+
+        this.notes.set(noteObj)
     }
 
     async canDeleteDirectory(directory: LocalBrowserDirectory): Promise<boolean> {

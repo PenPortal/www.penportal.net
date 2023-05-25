@@ -49,6 +49,9 @@ export type I18NTranslation = {
     space: string
 
     selectASpace: string
+    createSpace: string
+
+    spaceName: string
 }
 
 export const i18n: I18N = {

@@ -121,6 +121,10 @@ export abstract class Note implements DirectoryItem {
         this.contentLoaded = false
     }
 
+    async init(): Promise<void> {
+        return
+    }
+
     /**
      * @returns the content of the note, it will make sure the content is loaded
      */

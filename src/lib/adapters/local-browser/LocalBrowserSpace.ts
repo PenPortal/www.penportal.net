@@ -7,6 +7,10 @@ export class LocalBrowserSpace extends Space<LocalBrowserDirectory, LocalBrowser
     db: LocalDB
     root: LocalBrowserDirectory
 
+    async init() {
+        await this.root.init()
+    }
+
     constructor(db: LocalDB, name: string, id: string, dirId: string) {
         super(name, id)
         this.db = db

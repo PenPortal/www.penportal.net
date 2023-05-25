@@ -2,12 +2,15 @@
 </script>
 
 <script lang="ts">
-    import { getContext } from "svelte"
+    import { getContext, onMount } from "svelte"
     import type { I18NTranslation } from "$lib/I18n/i18n"
     import type { Readable } from "svelte/store"
     import CreateProfileModal from "./CreateProfileModal.svelte"
     import type { PageData } from "./$types"
     import { writable } from "svelte/store"
+    import { liveQuery } from "dexie"
+    import { profileDB } from "./profiles"
+    import { invalidate } from "$app/navigation"
 
     const i18n = getContext<Readable<I18NTranslation>>("i18n")
 
@@ -18,6 +21,12 @@
     $: profiles = $profilesStore
 
     let showCreateProfileModal = false
+
+    onMount(() => {
+        return liveQuery(() => profileDB.profiles.toArray()).subscribe((profiles) => {
+            invalidate("profileDB")
+        })
+    })
 </script>
 
 <CreateProfileModal bind:showModal={showCreateProfileModal} on:close={() => (showCreateProfileModal = false)} />
@@ -48,6 +57,7 @@
 
 <style>
     main {
+        max-height: 600px;
         max-width: 600px;
         padding: 8px;
         box-sizing: border-box;
@@ -70,6 +80,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.8rem;
+        overflow-y: auto;
     }
 
     li {

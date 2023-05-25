@@ -39,5 +39,7 @@ export const english: I18NTranslation = {
     loading: "Loading",
     default: "Default",
     space: "Space",
-    selectASpace: "Select a space"
+    selectASpace: "Select a space",
+    createSpace: "Create Space",
+    spaceName: "Space Name"
 }
