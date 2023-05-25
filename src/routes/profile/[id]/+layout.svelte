@@ -25,6 +25,9 @@
 
 <style>
     div {
+        min-height: 100vh;
+        height: 100vh;
+        box-sizing: border-box;
         padding: 16px;
     }
 </style>

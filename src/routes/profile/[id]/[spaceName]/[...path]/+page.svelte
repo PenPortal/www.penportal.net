@@ -35,7 +35,14 @@
         {formatSpaceName(space.name)}
     </h1>
 
-    <div>
-        <DirectoryView directory={dir} />
-    </div>
+    <DirectoryView directory={dir} />
 </main>
+
+<style>
+    main {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+</style>

@@ -1,5 +1,6 @@
 import type { Writable } from "svelte/store"
 import { get, writable } from "svelte/store"
+import type { SerializedEditorState } from "lexical/LexicalEditorState"
 
 export abstract class Controller<SPACE extends Space<D, N>, D extends Directory<D, N>, N extends Note> {
     spaces: Writable<Record<string, SPACE>> = writable({})
@@ -113,7 +114,7 @@ export abstract class Note implements DirectoryItem {
 
     contentLoaded: boolean
 
-    content: Writable<string> | null = null
+    content: Writable<SerializedEditorState> | null = null
 
     protected constructor(name: string, id: string) {
         this.name = name
@@ -128,7 +129,7 @@ export abstract class Note implements DirectoryItem {
     /**
      * @returns the content of the note, it will make sure the content is loaded
      */
-    async getContent(): Promise<Writable<string>> {
+    async getContent(): Promise<Writable<SerializedEditorState>> {
         if (!this.contentLoaded) {
             this.content = writable(await this.loadContent())
             this.contentLoaded = true
@@ -137,7 +138,7 @@ export abstract class Note implements DirectoryItem {
         return this.content!
     }
 
-    abstract loadContent(): Promise<string>
+    abstract loadContent(): Promise<SerializedEditorState>
 
     abstract saveContent(): Promise<void>
 }

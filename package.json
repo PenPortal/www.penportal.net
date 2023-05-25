@@ -12,10 +12,16 @@
         "format": "prettier --plugin-search-dir . --write ."
     },
     "devDependencies": {
+        "@floating-ui/dom": "^1.2.8",
+        "@lexical/clipboard": "^0.11.0",
+        "@lexical/list": "^0.11.0",
+        "@lexical/markdown": "^0.11.0",
+        "@lexical/rich-text": "^0.11.0",
         "@radix-ui/colors": "^0.1.8",
         "@sveltejs/adapter-auto": "^2.0.0",
         "@sveltejs/kit": "^1.5.0",
         "dexie": "next",
+        "lexical": "^0.11.0",
         "prettier": "^2.8.0",
         "prettier-plugin-svelte": "^2.8.1",
         "svelte": "^3.54.0",

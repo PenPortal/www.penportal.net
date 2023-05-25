@@ -10,21 +10,18 @@
     import { writable } from "svelte/store"
     import { liveQuery } from "dexie"
     import { profileDB } from "./profiles"
-    import { invalidate } from "$app/navigation"
 
     const i18n = getContext<Readable<I18NTranslation>>("i18n")
 
     export let data: PageData
 
-    let profilesStore = writable(data.profiles)
-
-    $: profiles = $profilesStore
+    let profiles = writable(data.profiles)
 
     let showCreateProfileModal = false
 
     onMount(() => {
-        return liveQuery(() => profileDB.profiles.toArray()).subscribe((profiles) => {
-            invalidate("profileDB")
+        return liveQuery(() => profileDB.profiles.toArray()).subscribe((p) => {
+            $profiles = p
         })
     })
 </script>
@@ -37,13 +34,13 @@
         <button class="create-btn subtitle3" on:click={() => (showCreateProfileModal = true)}>
             +&nbsp;{$i18n.createProfile}
         </button>
-        {#if profiles == null}
+        {#if $profiles == null}
             <p class="subtitle2" style="opacity: 0;">{$i18n.loading}</p>
-        {:else if profiles.length === 0}
+        {:else if $profiles.length === 0}
             <p class="subtitle2 no-profile">{$i18n.noProfiles}</p>
         {:else}
             <ol>
-                {#each profiles as profile (profile.id)}
+                {#each $profiles as profile (profile.id)}
                     <li class="">
                         <a class="subtitle3_1 profile-card" href="/profile/{profile.id}">
                             <span style:view-transition-name="title-of-profile-{profile.id}">{profile.name}</span>

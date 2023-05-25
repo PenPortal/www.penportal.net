@@ -1,1 +1,5 @@
-<h1>edit</h1>
+<script>
+    import BlockEditor from "$lib/editor/BlockEditor.svelte"
+</script>
+
+<BlockEditor />
