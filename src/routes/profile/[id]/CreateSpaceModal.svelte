@@ -45,7 +45,7 @@
         }
     }
 
-    const controller = getContext<Controller<any, any, any>>("controller")
+    export let controller: Controller<any, any, any>
 
     async function createSpace() {
         await controller.createSpace(name)

@@ -4,16 +4,20 @@
     import FileIcon from "./FileIcon.svelte"
     import FolderIcon from "./FolderIcon.svelte"
     import DirectoryContextMenu from "./DirectoryContextMenu.svelte"
-    import { computePosition } from "@floating-ui/dom"
+    import { computePosition, flip } from "@floating-ui/dom"
+    import { setContext } from "svelte"
 
     export let directory: Directory<any, any>
 
     $: directories = directory.directories
     $: notes = directory.notes
 
+    setContext("directory", directory)
+
     $: console.log($directories, $notes)
 
     let directoryCtxMenuElm: HTMLElement
+    let dirDom: HTMLElement
 
     function handleRightClick({ clientX, clientY }: MouseEvent) {
         const virtualEl = {
@@ -32,7 +36,13 @@
         }
 
         computePosition(virtualEl, directoryCtxMenuElm, {
-            placement: "right"
+            placement: "bottom-start",
+            middleware: [
+                flip({
+                    boundary: dirDom,
+                    padding: 8
+                })
+            ]
         }).then(({ x, y }) => {
             Object.assign(directoryCtxMenuElm.style, {
                 left: `${x}px`,
@@ -45,7 +55,7 @@
 
 <DirectoryContextMenu bind:dom={directoryCtxMenuElm} />
 
-<ol class="box" on:contextmenu|preventDefault={handleRightClick}>
+<ol bind:this={dirDom} class="box" on:contextmenu|preventDefault={handleRightClick}>
     {#each Object.entries($directories) as [name, dir] (dir.id)}
         <li>
             <a href="{$page.url.pathname}/{name}">
@@ -75,6 +85,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         gap: 1em;
+
+        overflow: clip;
     }
 
     li {

@@ -24,7 +24,7 @@
     }
 </script>
 
-<CreateSpaceModal bind:showModal={showCreateSpaceModal} />
+<CreateSpaceModal bind:showModal={showCreateSpaceModal} {controller} />
 
 <main>
     <h1 class="headline2" style:view-transition-name="title-of-profile-{profile.id}">

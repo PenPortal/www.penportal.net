@@ -1,4 +1,6 @@
 import { english } from "$lib/I18n/translation/en"
+import { getContext } from "svelte"
+import type { Readable } from "svelte/store"
 
 export type Languages = "en"
 
@@ -52,6 +54,14 @@ export type I18NTranslation = {
     createSpace: string
 
     spaceName: string
+    folderName: string
+
+    createFolder: string
+    createNote: string
+}
+
+export function currentLang() {
+    return getContext<Readable<I18NTranslation>>("i18n")
 }
 
 export const i18n: I18N = {
