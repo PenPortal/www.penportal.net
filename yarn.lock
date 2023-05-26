@@ -300,7 +300,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lexical/selection@npm:0.11.0":
+"@lexical/selection@npm:0.11.0, @lexical/selection@npm:^0.11.0":
   version: 0.11.0
   resolution: "@lexical/selection@npm:0.11.0"
   peerDependencies:
@@ -320,7 +320,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lexical/text@npm:0.11.0":
+"@lexical/text@npm:0.11.0, @lexical/text@npm:^0.11.0":
   version: 0.11.0
   resolution: "@lexical/text@npm:0.11.0"
   peerDependencies:
@@ -329,7 +329,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lexical/utils@npm:0.11.0":
+"@lexical/utils@npm:0.11.0, @lexical/utils@npm:^0.11.0":
   version: 0.11.0
   resolution: "@lexical/utils@npm:0.11.0"
   dependencies:
@@ -1563,6 +1563,9 @@ __metadata:
     "@lexical/list": ^0.11.0
     "@lexical/markdown": ^0.11.0
     "@lexical/rich-text": ^0.11.0
+    "@lexical/selection": ^0.11.0
+    "@lexical/text": ^0.11.0
+    "@lexical/utils": ^0.11.0
     "@radix-ui/colors": ^0.1.8
     "@sveltejs/adapter-auto": ^2.0.0
     "@sveltejs/kit": ^1.5.0

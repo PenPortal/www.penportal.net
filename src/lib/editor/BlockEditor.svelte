@@ -1,35 +1,13 @@
 <script lang="ts">
-    import { createEditor } from "lexical"
-    import { ListItemNode, ListNode } from "@lexical/list"
-    import { HeadingNode, QuoteNode, registerRichText } from "@lexical/rich-text"
-    import { HEADING, registerMarkdownShortcuts } from "@lexical/markdown"
-    import type { EditorThemeClasses } from "lexical/LexicalEditor"
+    import { KEY_DOWN_COMMAND } from "lexical"
 
     import "./editors.css"
     import { onMount } from "svelte"
+    import { setupEditor } from "$lib/editor/block-editor"
+    import { textSliceCursor } from "$lib/editor/utils/textSliceCursor"
+    import type { ClientRectObject } from "@floating-ui/core"
 
-    const theming: EditorThemeClasses = {
-        heading: {
-            h1: "editor-h1",
-            h2: "editor-h2",
-            h3: "editor-h3",
-            h4: "editor-h4",
-            h5: "editor-h5",
-            h6: "editor-h6"
-        }
-    }
-
-    const config = {
-        namespace: "MyEditor",
-        theme: theming,
-        nodes: [HeadingNode, ListNode, ListItemNode, QuoteNode],
-        onError: console.error
-    }
-
-    const editor = createEditor(config)
-
-    registerRichText(editor)
-    registerMarkdownShortcuts(editor, [HEADING])
+    const editor = setupEditor()
 
     let editorRoot: HTMLElement
 
@@ -39,13 +17,43 @@
         }
     }
 
+    let startListeningForToolbar = false
+
+    let cursorPos: ClientRectObject | null = null
+    let toolbarText: string | null = null
+
     onMount(() => {
         return editor.registerUpdateListener(({ editorState }) => {
-            // The latest EditorState can be found as `editorState`.
-            // To read the contents of the EditorState, use the following API:
+            editorState.read(() => {
+                if (startListeningForToolbar) {
+                    const result = textSliceCursor(() => {
+                        startListeningForToolbar = false
+                    })
 
-            console.log(editorState.toJSON())
+                    if (result) {
+                        cursorPos = result.position
+                        toolbarText = result.text
+                    } else {
+                        cursorPos = null
+                        toolbarText = null
+                    }
+                }
+            })
         })
+    })
+
+    onMount(() => {
+        return editor.registerCommand<KeyboardEvent>(
+            KEY_DOWN_COMMAND,
+            (e) => {
+                if (e.key == "/") {
+                    startListeningForToolbar = true
+                }
+
+                return true
+            },
+            1
+        )
     })
 </script>
 

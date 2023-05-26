@@ -20,25 +20,30 @@ html {
 
 .editor-h1 {
     margin-top: 0;
-    font-size: 4.209rem;
+    font-size: 3.052rem;
 }
 
 .editor-h2 {
-    font-size: 3.157rem;
+    font-size: 2.441rem;
 }
 
 .editor-h3 {
-    font-size: 2.369rem;
+    font-size: 1.953rem;
 }
 
 .editor-h4 {
-    font-size: 1.777rem;
+    font-size: 1.563rem;
 }
 
 .editor-h5 {
-    font-size: 1.333rem;
+    font-size: 1.25rem;
 }
 
 .editor-small {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+}
+
+.editor-bold {
+    font-weight: bold;
+    font-family: var(--font-medium);
 }
