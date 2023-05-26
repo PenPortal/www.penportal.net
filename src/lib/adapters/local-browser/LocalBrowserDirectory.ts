@@ -1,7 +1,6 @@
 import { Directory, emptySerializedEditorState } from "$lib/controller/Controller"
 import { LocalBrowserNote } from "$lib/adapters/local-browser/LocalBrowserNote"
 import type { LocalDB } from "$lib/adapters/local-browser/LocalBrowserAdapter"
-import { liveQuery } from "dexie"
 
 export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, LocalBrowserNote> {
     db: LocalDB
@@ -14,15 +13,6 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
     async init(): Promise<void> {
         await this.refreshDirectories()
         await this.refreshNotes()
-
-        liveQuery(async () => {
-            await this.db.directories.where({ parentId: this.id })
-
-            await this.db.notes.where({ parentId: this.id })
-        }).subscribe(() => {
-            this.refreshDirectories()
-            this.refreshNotes()
-        })
     }
 
     private async refreshDirectories() {
@@ -84,12 +74,19 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
             throw new Error(`Cannot create directory with name ${name}`)
         }
 
-        await this.db.directories.add({
+        const id = await this.db.directories.add({
             id: crypto.randomUUID(),
             parentId: this.id,
             name,
             directories: [],
             notes: []
+        })
+
+        const newDirectory = new LocalBrowserDirectory(this.db, name, id)
+        await newDirectory.init()
+        this.directories.update((directories) => {
+            directories[name] = newDirectory
+            return directories
         })
     }
 
@@ -104,11 +101,19 @@ export class LocalBrowserDirectory extends Directory<LocalBrowserDirectory, Loca
             throw new Error(`Cannot create note with name ${name}`)
         }
 
-        await this.db.notes.add({
+        const id = await this.db.notes.add({
             id: crypto.randomUUID(),
             parentId: this.id,
             name: name,
             content: emptySerializedEditorState
+        })
+
+        const newNote = new LocalBrowserNote(this.db, name, id)
+        await newNote.init()
+
+        this.notes.update((notes) => {
+            notes[name] = newNote
+            return notes
         })
     }
 

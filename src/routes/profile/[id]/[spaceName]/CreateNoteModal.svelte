@@ -14,11 +14,10 @@
 
     let createPromise: Promise<void>
 
-    async function createFolder() {
+    async function createNote() {
         creating = true
         try {
-            console.log(directory)
-            createPromise = directory.createDirectory(name)
+            createPromise = directory.createNote(name)
             await createPromise
             show = false
         } catch (error) {
@@ -32,11 +31,11 @@
 {#if show}
     <BaseDialog bind:showModal={show}>
         <h1 class="subtitle2" slot="title">
-            {$i18n.createFolder}
+            {$i18n.createNote}
         </h1>
 
         <form id="create">
-            <label class="label subtitle3">{$i18n.folderName}</label>
+            <label class="label subtitle3">{$i18n.noteName}</label>
             <input class="input body1" autofocus type="text" bind:value={name} required />
         </form>
 
@@ -57,7 +56,7 @@
                 form="create"
                 type="submit"
                 disabled={creating}
-                on:click={createFolder}
+                on:click={createNote}
             >
                 {creating ? $i18n.creating : $i18n.create}
             </button>

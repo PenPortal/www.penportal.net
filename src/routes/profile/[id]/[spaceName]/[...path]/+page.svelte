@@ -33,6 +33,11 @@
 <main>
     <h1 class="headline3">
         {formatSpaceName(space.name)}
+
+        {#each path as part}
+            /
+            <span>{part}</span>
+        {/each}
     </h1>
 
     <DirectoryView directory={dir} />

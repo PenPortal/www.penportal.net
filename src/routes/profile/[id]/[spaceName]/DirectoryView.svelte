@@ -14,8 +14,6 @@
 
     setContext("directory", directory)
 
-    $: console.log($directories, $notes)
-
     let directoryCtxMenuElm: HTMLElement
     let dirDom: HTMLElement
 
@@ -53,7 +51,7 @@
     }
 </script>
 
-<DirectoryContextMenu bind:dom={directoryCtxMenuElm} />
+<DirectoryContextMenu bind:dom={directoryCtxMenuElm} {directory} />
 
 <ol bind:this={dirDom} class="box" on:contextmenu|preventDefault={handleRightClick}>
     {#each Object.entries($directories) as [name, dir] (dir.id)}
@@ -114,6 +112,10 @@
 
     .box a:focus :global(svg) {
         background: var(--blue6);
+    }
+
+    p {
+        text-align: center;
     }
 
     .box :global(svg) {

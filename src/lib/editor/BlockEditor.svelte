@@ -2,12 +2,14 @@
     import { KEY_DOWN_COMMAND } from "lexical"
 
     import "./editors.css"
-    import { onMount } from "svelte"
+    import { onMount, setContext } from "svelte"
     import { setupEditor } from "$lib/editor/block-editor"
     import { textSliceCursor } from "$lib/editor/utils/textSliceCursor"
     import type { ClientRectObject } from "@floating-ui/core"
+    import FloatingToolbox from "$lib/editor/toolbox/FloatingToolbox.svelte"
 
     const editor = setupEditor()
+    setContext("editor", editor)
 
     let editorRoot: HTMLElement
 
@@ -56,6 +58,10 @@
         )
     })
 </script>
+
+{#if cursorPos && toolbarText != null}
+    <FloatingToolbox pos={cursorPos} />
+{/if}
 
 <div bind:this={editorRoot} contenteditable="true" class="editor-root" />
 

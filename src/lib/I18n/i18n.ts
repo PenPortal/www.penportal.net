@@ -55,6 +55,7 @@ export type I18NTranslation = {
 
     spaceName: string
     folderName: string
+    noteName: string
 
     createFolder: string
     createNote: string

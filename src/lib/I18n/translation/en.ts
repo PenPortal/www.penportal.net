@@ -44,6 +44,7 @@ export const english: I18NTranslation = {
 
     spaceName: "Space Name",
     folderName: "Folder Name",
+    noteName: "Note Name",
 
     createFolder: "Create Folder",
     createNote: "Create Note"

@@ -5,6 +5,7 @@
     import type { Readable } from "svelte/store"
     import CreateFolderModal from "./CreateFolderModal.svelte"
     import type { Directory } from "$lib/controller/Controller"
+    import CreateNoteModal from "./CreateNoteModal.svelte"
 
     function handleClickOutside() {
         Object.assign(dom.style, {
@@ -15,7 +16,7 @@
     export let dom: HTMLElement
 
     const i18n = getContext<Readable<I18NTranslation>>("i18n")
-    const directory = getContext<Directory<any, any>>("directory")
+    export let directory: Directory<any, any>
 
     type Action = {
         translationKey: string
@@ -30,13 +31,12 @@
             translationKey: "createFolder",
             action: () => {
                 showCreateFolderModal = true
-                console.log("create folder")
             }
         },
         {
             translationKey: "createNote",
             action: () => {
-                console.log("create note")
+                showCreateNoteModal = true
             }
         }
     ]
@@ -44,6 +44,10 @@
 
 {#if showCreateFolderModal}
     <CreateFolderModal bind:show={showCreateFolderModal} {directory} />
+{/if}
+
+{#if showCreateNoteModal}
+    <CreateNoteModal bind:show={showCreateNoteModal} {directory} />
 {/if}
 
 <div use:clickOutside on:click_outside={handleClickOutside} bind:this={dom} class="context">

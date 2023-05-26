@@ -79,6 +79,10 @@ export abstract class Directory<DIR extends Directory<DIR, NOTE>, NOTE extends N
         return
     }
 
+    async close(): Promise<void> {
+        return
+    }
+
     async getDirectory(name: string): Promise<DIR | null> {
         return get(this.directories)[name] ?? null
     }
@@ -127,6 +131,10 @@ export abstract class Note implements DirectoryItem {
     }
 
     async init(): Promise<void> {
+        return
+    }
+
+    async close(): Promise<void> {
         return
     }
 
