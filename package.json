@@ -14,6 +14,7 @@
     "devDependencies": {
         "@floating-ui/dom": "^1.2.8",
         "@lexical/clipboard": "^0.11.0",
+        "@lexical/history": "^0.11.1",
         "@lexical/list": "^0.11.0",
         "@lexical/markdown": "^0.11.0",
         "@lexical/rich-text": "^0.11.0",

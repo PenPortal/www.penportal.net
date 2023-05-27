@@ -5,6 +5,7 @@ import { HEADING, registerMarkdownShortcuts } from "@lexical/markdown"
 import type { EditorThemeClasses } from "lexical/LexicalEditor"
 
 import "./editors.css"
+import { registerHistory } from "@lexical/history"
 
 export function setupEditor() {
     const theming: EditorThemeClasses = {
@@ -17,7 +18,7 @@ export function setupEditor() {
             h6: "editor-h6"
         },
         text: {
-            base: "editor-p",
+            base: "editor-base",
             bold: "editor-bold"
         }
     }

@@ -239,6 +239,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lexical/history@npm:^0.11.1":
+  version: 0.11.1
+  resolution: "@lexical/history@npm:0.11.1"
+  dependencies:
+    "@lexical/utils": 0.11.1
+  peerDependencies:
+    lexical: 0.11.1
+  checksum: 7af2b628dce72d78a3b98a64bb13ff3d135bad0e5d369defb747026ecb117e3e40658b236672dd01e945fcbb839badf80b111fd324bee438cae32b90d90bc280
+  languageName: node
+  linkType: hard
+
 "@lexical/html@npm:0.11.0":
   version: 0.11.0
   resolution: "@lexical/html@npm:0.11.0"
@@ -269,6 +280,17 @@ __metadata:
   peerDependencies:
     lexical: 0.11.0
   checksum: bdc5e9ad70feae427ed64147a280fb2e957d2af6527648b29914586246f445f251e50a13d9f3fdd92c6fcb375afce2e60d7bc98c97655a3afc201df2b59d5bcf
+  languageName: node
+  linkType: hard
+
+"@lexical/list@npm:0.11.1":
+  version: 0.11.1
+  resolution: "@lexical/list@npm:0.11.1"
+  dependencies:
+    "@lexical/utils": 0.11.1
+  peerDependencies:
+    lexical: 0.11.1
+  checksum: a7c5c84dafca6acfdca394d4442ac93402c617ee4d1d203efb59044cc0f678eb3ce26c3a9fdd321c6fc2434f8364eadcc6bd0b9a6fbc8bc633f0bb0bc540e1b1
   languageName: node
   linkType: hard
 
@@ -309,6 +331,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lexical/selection@npm:0.11.1":
+  version: 0.11.1
+  resolution: "@lexical/selection@npm:0.11.1"
+  peerDependencies:
+    lexical: 0.11.1
+  checksum: cff879ec301e0f0b03a75ef8b7a8526ed20f4dc1e5ac2293f5630a406abd0a9d20fde108d18a052c2357eb57de59cecfd369ebcaa6f2e17d275aa99748c836d2
+  languageName: node
+  linkType: hard
+
 "@lexical/table@npm:0.11.0":
   version: 0.11.0
   resolution: "@lexical/table@npm:0.11.0"
@@ -317,6 +348,17 @@ __metadata:
   peerDependencies:
     lexical: 0.11.0
   checksum: 0c38e1132778254acc7df46d50706ca0a3f45d2680d9759e5879b94cfcbb8a9c1ff1d95394b1db1cadb3d4c1a72c29753c20d90c173cffd4400a243385876eb2
+  languageName: node
+  linkType: hard
+
+"@lexical/table@npm:0.11.1":
+  version: 0.11.1
+  resolution: "@lexical/table@npm:0.11.1"
+  dependencies:
+    "@lexical/utils": 0.11.1
+  peerDependencies:
+    lexical: 0.11.1
+  checksum: 976b207163558b9e0fa58c1dd350d30d3b73d44ed21c88d65654ca50a9a28f5814ff0099eff7297c05c92a94131bf4ddbfe95d5b8e82d41f7a09c90aa6f00b4f
   languageName: node
   linkType: hard
 
@@ -339,6 +381,19 @@ __metadata:
   peerDependencies:
     lexical: 0.11.0
   checksum: 1a34b931a5fe0adcdbfb19ce14ca52c29fd7248df9149b8b6fb3ed0304751e335516db7211185ef322a76627298a852b99f09cdaca7bf0bb185da2349eb43e74
+  languageName: node
+  linkType: hard
+
+"@lexical/utils@npm:0.11.1":
+  version: 0.11.1
+  resolution: "@lexical/utils@npm:0.11.1"
+  dependencies:
+    "@lexical/list": 0.11.1
+    "@lexical/selection": 0.11.1
+    "@lexical/table": 0.11.1
+  peerDependencies:
+    lexical: 0.11.1
+  checksum: a56da3564d5c80ee03e591c521c5079ead70d2dacbe358a18d2a6821dae26341b54da402cf7a362d9b4948d715b7d01550ec8fd73cdd13604ec866599c58723a
   languageName: node
   linkType: hard
 
@@ -1560,6 +1615,7 @@ __metadata:
   dependencies:
     "@floating-ui/dom": ^1.2.8
     "@lexical/clipboard": ^0.11.0
+    "@lexical/history": ^0.11.1
     "@lexical/list": ^0.11.0
     "@lexical/markdown": ^0.11.0
     "@lexical/rich-text": ^0.11.0

@@ -36,6 +36,7 @@ export function textSliceCursor(stopToolbar: () => void) {
 
     return {
         position: document.getSelection()!.getRangeAt(0).getClientRects()[0],
-        text: strippedText
+        text: strippedText,
+        selection: selection
     }
 }

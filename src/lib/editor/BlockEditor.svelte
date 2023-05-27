@@ -1,12 +1,9 @@
 <script lang="ts">
-    import { KEY_DOWN_COMMAND } from "lexical"
-
     import "./editors.css"
-    import { onMount, setContext } from "svelte"
+    import { setContext } from "svelte"
     import { setupEditor } from "$lib/editor/block-editor"
-    import { textSliceCursor } from "$lib/editor/utils/textSliceCursor"
-    import type { ClientRectObject } from "@floating-ui/core"
-    import FloatingToolbox from "$lib/editor/toolbox/FloatingToolbox.svelte"
+    import Toolbox from "$lib/editor/Toolbox.svelte"
+    import HistoryState from "$lib/editor/HistoryState.svelte"
 
     const editor = setupEditor()
     setContext("editor", editor)
@@ -18,50 +15,11 @@
             editor.setRootElement(editorRoot)
         }
     }
-
-    let startListeningForToolbar = false
-
-    let cursorPos: ClientRectObject | null = null
-    let toolbarText: string | null = null
-
-    onMount(() => {
-        return editor.registerUpdateListener(({ editorState }) => {
-            editorState.read(() => {
-                if (startListeningForToolbar) {
-                    const result = textSliceCursor(() => {
-                        startListeningForToolbar = false
-                    })
-
-                    if (result) {
-                        cursorPos = result.position
-                        toolbarText = result.text
-                    } else {
-                        cursorPos = null
-                        toolbarText = null
-                    }
-                }
-            })
-        })
-    })
-
-    onMount(() => {
-        return editor.registerCommand<KeyboardEvent>(
-            KEY_DOWN_COMMAND,
-            (e) => {
-                if (e.key == "/") {
-                    startListeningForToolbar = true
-                }
-
-                return true
-            },
-            1
-        )
-    })
 </script>
 
-{#if cursorPos && toolbarText != null}
-    <FloatingToolbox pos={cursorPos} />
-{/if}
+<HistoryState {editor} />
+
+<Toolbox {editor} />
 
 <div bind:this={editorRoot} contenteditable="true" class="editor-root" />
 
@@ -71,5 +29,13 @@
         height: 100%;
 
         outline: none;
+
+        padding: 0 24px;
+        box-sizing: border-box;
+
+        max-width: min(1000px, 100%);
+        margin: 0 auto;
+
+        font-size: 18px;
     }
 </style>
