@@ -1,7 +1,10 @@
 # Pen Portal
 
-I saw a lot of notes taking app got popular and their purpose isn't to "be" a notes taking app. I thought a bit and with
-my skill, I can definitely make a notes taking app too.
+## www-penportal-net.pages.dev
+
+I noticed the rise in popularity of numerous note-taking applications that serve a different purpose beyond just being a
+typical note-taking app. After some contemplation, I am confident in my abilities to create my own note-taking app as
+well.
 
 Here is the result
 
