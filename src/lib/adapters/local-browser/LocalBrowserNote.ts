@@ -11,6 +11,11 @@ export class LocalBrowserNote extends Note {
         this.db = db
     }
 
+    async init(): Promise<void> {
+        await this.getContent() // load content
+        return super.init()
+    }
+
     async loadContent(): Promise<SerializedEditorState> {
         const note = await this.db.notes.get(this.id)
         if (!note) {

@@ -47,5 +47,6 @@ export const english: I18NTranslation = {
     noteName: "Note Name",
 
     createFolder: "Create Folder",
-    createNote: "Create Note"
+    createNote: "Create Note",
+    emptyHelperMessage: "This space is empty. Right click to create a folder or a note."
 }

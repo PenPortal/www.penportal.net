@@ -5,9 +5,13 @@
     import FolderIcon from "./FolderIcon.svelte"
     import DirectoryContextMenu from "./DirectoryContextMenu.svelte"
     import { computePosition, flip } from "@floating-ui/dom"
-    import { setContext } from "svelte"
+    import type { Readable } from "svelte/store"
+    import { getContext, setContext } from "svelte"
+    import type { I18NTranslation } from "$lib/I18n/i18n"
 
     export let directory: Directory<any, any>
+
+    const i18n = getContext<Readable<I18NTranslation>>("i18n")
 
     $: directories = directory.directories
     $: notes = directory.notes
@@ -51,8 +55,6 @@
     }
 </script>
 
-<DirectoryContextMenu bind:dom={directoryCtxMenuElm} {directory} />
-
 <ol bind:this={dirDom} class="box" on:contextmenu|preventDefault={handleRightClick}>
     {#each Object.entries($directories) as [name, dir] (dir.id)}
         <li>
@@ -71,9 +73,23 @@
             </a>
         </li>
     {/each}
+
+    {#if Object.keys($notes).length === 0 && Object.keys($directories).length === 0}
+        <p class="headline5 helper-message">{$i18n.emptyHelperMessage}</p>
+    {/if}
 </ol>
 
+<DirectoryContextMenu bind:dom={directoryCtxMenuElm} {directory} />
+
 <style>
+    .helper-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+    }
+
     ol {
         all: unset;
 

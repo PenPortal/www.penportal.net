@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getContext } from "svelte"
+    import { getContext, setContext } from "svelte"
     import type { Readable } from "svelte/store"
     import { get } from "svelte/store"
     import type { Controller } from "$lib/controller/Controller"
@@ -14,6 +14,8 @@
     $: path = $page.params.path.split("/")
 
     $: dir = getDirectory(path)
+
+    setContext("directory", dir)
 
     function getDirectory(path: string[]) {
         let dir = get(space.root.directories)[path[0]]

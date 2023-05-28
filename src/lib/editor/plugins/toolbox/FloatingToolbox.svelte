@@ -3,7 +3,7 @@
     import type { ClientRectObject } from "@floating-ui/core"
     import { createEventDispatcher, getContext } from "svelte"
     import type { LexicalEditor } from "lexical/LexicalEditor"
-    import { texts } from "$lib/editor/toolbox/toolbox"
+    import { texts } from "$lib/editor/plugins/toolbox/toolbox"
 
     export let pos: ClientRectObject | null
     export let toolbarText: string

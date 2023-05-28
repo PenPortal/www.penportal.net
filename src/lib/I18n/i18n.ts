@@ -59,6 +59,8 @@ export type I18NTranslation = {
 
     createFolder: string
     createNote: string
+
+    emptyHelperMessage: string
 }
 
 export function currentLang() {

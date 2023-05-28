@@ -1,7 +1,7 @@
 import type { LexicalEditor } from "lexical/LexicalEditor"
 import { $createParagraphNode, $getSelection, $isRangeSelection, DEPRECATED_$isGridSelection } from "lexical"
 import { $setBlocksType } from "@lexical/selection"
-import { changeToHeading, changeToParagraph } from "$lib/editor/toolbox/text-actions"
+import { changeToHeading, changeToParagraph } from "$lib/editor/plugins/toolbox/text-actions"
 
 export type Action = {
     name: string

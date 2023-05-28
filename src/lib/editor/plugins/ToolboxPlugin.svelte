@@ -4,7 +4,7 @@
     import { KEY_DOWN_COMMAND, type RangeSelection } from "lexical"
     import { onMount } from "svelte"
     import { textSliceCursor } from "$lib/editor/utils/textSliceCursor"
-    import FloatingToolbox from "$lib/editor/toolbox/FloatingToolbox.svelte"
+    import FloatingToolbox from "$lib/editor/plugins/toolbox/FloatingToolbox.svelte"
 
     export let editor: LexicalEditor
 

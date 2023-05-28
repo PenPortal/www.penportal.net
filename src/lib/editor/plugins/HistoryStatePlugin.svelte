@@ -6,7 +6,7 @@
     export let editor: LexicalEditor
 
     export let externalHistoryState: HistoryState = createEmptyHistoryState()
-    export let delay = 1000
+    export let delay = 800
 
     // returns callback to unregister
     onMount(() => registerHistory(editor, externalHistoryState, delay))

@@ -239,6 +239,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lexical/code@npm:^0.11.1":
+  version: 0.11.1
+  resolution: "@lexical/code@npm:0.11.1"
+  dependencies:
+    "@lexical/utils": 0.11.1
+    prismjs: ^1.27.0
+  peerDependencies:
+    lexical: 0.11.1
+  checksum: 9eeb4a355144fef1601fd83970be79421ec358469965eda0ba4c5005120854fa7fb4e463934633fe77bad718407e52f1ba1d88169f9e726be97ec7b280948eb7
+  languageName: node
+  linkType: hard
+
 "@lexical/history@npm:^0.11.1":
   version: 0.11.1
   resolution: "@lexical/history@npm:0.11.1"
@@ -269,6 +281,17 @@ __metadata:
   peerDependencies:
     lexical: 0.11.0
   checksum: 13910211a6fd73be93b4d5b944708c3ee4debf8e887fd7f4dc54c27401af74ba0301b8d76c6e3a9f586ff3939d23fcda4978f738b2dc3ee569f564cb6021797c
+  languageName: node
+  linkType: hard
+
+"@lexical/link@npm:^0.11.1":
+  version: 0.11.1
+  resolution: "@lexical/link@npm:0.11.1"
+  dependencies:
+    "@lexical/utils": 0.11.1
+  peerDependencies:
+    lexical: 0.11.1
+  checksum: 91fc869450aa6b2bf901f08ba0e742063ec1df0d9968acedf0a82bfb50031c795a6321247f05829e686b9a27bb93c5ae8214c5a12b5c851fed36338bc4703563
   languageName: node
   linkType: hard
 
@@ -1615,7 +1638,9 @@ __metadata:
   dependencies:
     "@floating-ui/dom": ^1.2.8
     "@lexical/clipboard": ^0.11.0
+    "@lexical/code": ^0.11.1
     "@lexical/history": ^0.11.1
+    "@lexical/link": ^0.11.1
     "@lexical/list": ^0.11.0
     "@lexical/markdown": ^0.11.0
     "@lexical/rich-text": ^0.11.0
