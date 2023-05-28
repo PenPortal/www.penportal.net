@@ -1,6 +1,9 @@
 import type { LayoutLoad } from "./$types"
 import { profileDB } from "../../profiles"
 
+export const prerender = false
+
+
 export const load = (async ({ params }) => {
     const profile = await profileDB.profiles.where("id").equals(params.id).first()
 

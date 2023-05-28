@@ -492,6 +492,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sveltejs/adapter-static@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@sveltejs/adapter-static@npm:2.0.2"
+  peerDependencies:
+    "@sveltejs/kit": ^1.5.0
+  checksum: 46473ad215f7fb85cea3d7939d2754589c8dfb224b3373ec0147a652d92962333801984070fc899565488e38cd8e7b2c0952bdd3759c7b7ae5e1fb64285b9e14
+  languageName: node
+  linkType: hard
+
 "@sveltejs/kit@npm:^1.5.0":
   version: 1.18.0
   resolution: "@sveltejs/kit@npm:1.18.0"
@@ -1649,6 +1658,7 @@ __metadata:
     "@lexical/utils": ^0.11.0
     "@radix-ui/colors": ^0.1.8
     "@sveltejs/adapter-auto": ^2.0.0
+    "@sveltejs/adapter-static": ^2.0.2
     "@sveltejs/kit": ^1.5.0
     dexie: next
     lexical: ^0.11.0
